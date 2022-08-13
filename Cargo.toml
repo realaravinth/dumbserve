@@ -1,0 +1,32 @@
+[package]
+name = "dumbserve"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/realaravinth/dumbserve"
+readme = "README.md"
+license = "AGPLv3 or later version"
+authors = ["realaravinth <realaravinth@batsense.net>"]
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-files = "0.6.2"
+actix-multipart = "0.4"
+actix-web = "4"
+actix-web-httpauth = "0.8.0"
+futures-util = { version = "0.3.17", default-features = false, features = ["std"] }
+lazy_static = "1.4.0"
+log = "0.4.17"
+pretty_env_logger = "0.4.0"
+sanitize-filename = "0.4"
+serde = { version = "1", features=["derive"]}
+tokio = { version = "1.20.1", features = ["fs"]}
+uuid = { version = "1", features = ["v4"] }
+sqlx = { version = "0.5.13", features = [ "runtime-actix-rustls", "postgres", "time", "offline, ] }
+
+
+
+[build-dependencies]
+serde_json = "1"
+sqlx = { version = "0.5.13", features = [ "runtime-actix-rustls", "postgres", "time", "offline"] }
