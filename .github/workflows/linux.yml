@@ -126,7 +126,10 @@ jobs:
 
       - name: publish bins
         if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
-        run: ./scripts/publish.sh master latest
+        run: ./scripts/publish.sh publish master latest $DUMBSERVE_USERNAME $DUMBSERVE_PASSWORD
+        env:
+          DUMBSERVE_USERNAME: ${{ secrets.DUMBSERVE_USERNAME }}
+          DUMBSERVE_PASSWORD: ${{ secrets.DUMBSERVE_PASSWORD }}
 
       - name: generate documentation
         if: matrix.version == 'stable' && (github.repository == 'realaravinth/dumbserve')
