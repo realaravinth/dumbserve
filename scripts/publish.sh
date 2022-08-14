@@ -31,7 +31,7 @@ KEY=7981CA5AE57350D9F9BF5F6456CB9AF170E4A02F
 
 TMP_DIR=$(mktemp -d)
 FILENAME="$NAME-$2-linux-amd64"
-TARBALL=$TMP_DIR/$FILENAME.tar.gz
+TARBALL=$FILENAME.tar.gz
 TARGET_DIR="$TMP_DIR/$FILENAME/"
 mkdir -p $TARGET_DIR
 DOCKER_IMG="realaravinth/$NAME:$3"
@@ -60,17 +60,26 @@ copy() {
 
 pack() {
 	echo "[*] Creating dist tarball"
-	tar -cvzf $TARBALL $TARGET_DIR 
+	pushd $TMP_DIR
+	tar -cvzf $TARBALL $FILENAME
+	popd
 }
 
 checksum() {
 	echo "[*] Generating dist tarball checksum"
+	pushd $TMP_DIR
 	sha256sum $TARBALL > $TARBALL.sha256
+	popd
 }
 
 sign() {
 	echo "[*] Signing dist tarball checksum"
+	pushd $TMP_DIR
+	export GPG_TTY=$(tty)
+	find $(pwd)
+	find $TMP_DIR
 	gpg --local-user $KEY --output $TARBALL.asc --sign --detach --armor $TARBALL
+	popd
 }
 
 delete_dir() {
@@ -84,12 +93,14 @@ delete_dir() {
 upload_dist() {
 	delete_dir $1
 
+	pushd $TMP_DIR
 	for file in $TARBALL $TARBALL.asc $TARBALL.sha256
 	do
 		curl -v \
 			-F upload=@$file  \
 			"$DUMBSERVE_HOST/api/v1/files/upload?path=$1/"
 	done
+	popd
 }
 
 
