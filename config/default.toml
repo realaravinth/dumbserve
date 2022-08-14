@@ -1,8 +1,5 @@
 debug = true
 source_code = "https://github.com/realaravinth/dumbserve"
-commercial = false
-allow_demo = true
-allow_registration = true
 
 [server]
 # Please set a unique value, your mCaptcha instance's security depends on this being 

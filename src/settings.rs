@@ -92,12 +92,10 @@ impl Files {
 #[derive(Debug, Clone, Deserialize)]
 pub struct Settings {
     pub debug: bool,
-    pub commercial: bool,
     //    pub database: Database,
     pub server: Server,
     pub source_code: String,
     pub files: Files,
-    pub allow_registration: bool,
 }
 
 #[cfg(not(tarpaulin_include))]
