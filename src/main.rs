@@ -89,6 +89,7 @@ async fn main() -> std::io::Result<()> {
     let ctx = actix_web::web::Data::new(ctx);
 
     let ip = settings.server.get_ip();
+    let upload_path = settings.files.path;
     println!("Starting server on: http://{ip}");
 
     HttpServer::new(move || {
@@ -104,7 +105,7 @@ async fn main() -> std::io::Result<()> {
             ))
             .app_data(get_json_err())
             .configure(routes::services)
-            .service(Files::new("/", "./tmp").show_files_listing())
+            .service(Files::new("/", &upload_path).show_files_listing())
     })
     .bind(ip)?
     .run()
