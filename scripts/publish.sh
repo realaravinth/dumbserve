@@ -22,9 +22,9 @@
 
 set -xEeuo  pipefail
 
-DUMMYSERVE_USERNAME=$4
-DUMMYSERVE_PASSWORD=$5
-DUMMYSERVE_HOST="https://$DUMMYSERVE_USERNAME:$DUMMYSERVE_PASSWORD@dl.batsense.net"
+DUMBSERVE_USERNAME=$4
+DUMBSERVE_PASSWORD=$5
+DUMBSERVE_HOST="https://$DUMBSERVE_USERNAME:$DUMBSERVE_PASSWORD@dl.batsense.net"
 
 NAME=dummyserve
 
@@ -72,7 +72,7 @@ sign() {
 }
 
 delete_dir() {
-	curl --location --request DELETE "$DUMMYSERVE_HOST/api/v1/files/delete" \
+	curl --location --request DELETE "$DUMBSERVE_HOST/api/v1/files/delete" \
 		--header 'Content-Type: application/json' \
 		--data-raw "{
 			\"path\": \"$1\"
@@ -86,7 +86,7 @@ upload_dist() {
 	do
 		curl -v \
 			-F upload=@$file  \
-			"$DUMMYSERVE_HOST/api/v1/files/upload?path=$1/"
+			"$DUMBSERVE_HOST/api/v1/files/upload?path=$1/"
 	done
 }
 

@@ -75,6 +75,12 @@ jobs:
             #        with:
             #          node-version: "16.x"
 
+      - name: configure GPG key
+        if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
+        run: echo -n "$RELEASE_BOT_GPG_SIGNING_KEY" | gpg --import
+        env: 
+          RELEASE_BOT_GPG_SIGNING_KEY: ${{ secrets.RELEASE_BOT_GPG_SIGNING_KEY }}
+
       - name: Install ${{ matrix.version }}
         uses: actions-rs/toolchain@v1
         with:
@@ -87,6 +93,7 @@ jobs:
             #        env:
             #          POSTGRES_DATABASE_URL: "${{ env.POSTGRES_DATABASE_URL }}"
             #          MARIA_DATABASE_URL: "${{ env.MARIA_DATABASE_URL }}"
+            #          
 
       - name: build
         run: make
@@ -117,9 +124,9 @@ jobs:
         if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
         run: make docker-publish
 
-          #      - name: publish bins
-          #        if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
-          #        run: ./scripts/publish.sh master latest
+      - name: publish bins
+        if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
+        run: ./scripts/publish.sh master latest
 
       - name: generate documentation
         if: matrix.version == 'stable' && (github.repository == 'realaravinth/dumbserve')
