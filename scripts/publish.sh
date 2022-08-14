@@ -17,8 +17,8 @@
 # publish.sh: grab bin from docker container, pack, sign and upload
 # $2: binary version
 # $3: Docker img tag
-# $4: dummyserve username
-# $5: dummyserve password
+# $4: dumbserve username
+# $5: dumbserve password
 
 set -xEeuo  pipefail
 
@@ -26,12 +26,14 @@ DUMBSERVE_USERNAME=$4
 DUMBSERVE_PASSWORD=$5
 DUMBSERVE_HOST="https://$DUMBSERVE_USERNAME:$DUMBSERVE_PASSWORD@dl.batsense.net"
 
-NAME=dummyserve
+NAME=dumbserve
+KEY=7981CA5AE57350D9F9BF5F6456CB9AF170E4A02F
 
 TMP_DIR=$(mktemp -d)
-FILENAME="$NAMe-$2-linux-amd64"
-TARBALL="$FILENAME.tar.gz"
-TARGET_DIR="$TMP_DIR/$FILENAME"
+FILENAME="$NAME-$2-linux-amd64"
+TARBALL=$TMP_DIR/$FILENAME.tar.gz
+TARGET_DIR="$TMP_DIR/$FILENAME/"
+mkdir -p $TARGET_DIR
 DOCKER_IMG="realaravinth/$NAME:$3"
 
 
@@ -46,12 +48,12 @@ copy() {
 	echo "[*] Copying dist assets"
 	cp README.md  $TARGET_DIR
 	cp LICENSE.md $TARGET_DIR
-	cp CHANGELOG.md $TARGET_DIR
-	cp docker-compose.yml $TARGET_DIR
+#	cp CHANGELOG.md $TARGET_DIR
+#	cp docker-compose.yml $TARGET_DIR
 
-	mkdir $TARGET_DIR/docs
-	cp docs/DEPLOYMENT.md $TARGET_DIR/docs
-	cp docs/CONFIGURATION.md $TARGET_DIR/docs
+#	mkdir $TARGET_DIR/docs
+#	cp docs/DEPLOYMENT.md $TARGET_DIR/docs
+#	cp docs/CONFIGURATION.md $TARGET_DIR/docs
 
 	get_bin
 }
@@ -68,7 +70,7 @@ checksum() {
 
 sign() {
 	echo "[*] Signing dist tarball checksum"
-	gpg --output $TARBALL.asc --sign --detach --armor $TARBALL
+	gpg --local-user $KEY --output $TARBALL.asc --sign --detach --armor $TARBALL
 }
 
 delete_dir() {
@@ -94,14 +96,11 @@ upload_dist() {
 
 
 publish() {
-	mkdir $TARGET_DIR
 	copy
-	pushd $TMP_DIR
 	pack
 	checksum
 	sign
-	publish
-	popd
+	upload_dist $2
 }
 
 $1 $@
