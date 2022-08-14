@@ -44,5 +44,6 @@ RUN useradd -ms /bin/bash -u 1001 dumbserve
 WORKDIR /home/dumbserve
 COPY --from=rust /src/target/release/dumbserve /usr/local/bin/
 #COPY --from=rust /src/config/default.toml /etc/dumbserve/config.toml
+RUN chown dumbserve:dumbserve /var/lib/dumbserve
 USER dumbserve
 CMD [ "/usr/local/bin/dumbserve" ]
