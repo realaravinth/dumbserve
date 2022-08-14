@@ -16,11 +16,11 @@ doc: ## Generate documentation
 	cargo doc --no-deps --workspace --all-features
 
 docker: ## Build Docker image
-	docker build -t realaravinth/dummyserve:master -t realaravinth/dummyserve:latest .
+	docker build -t realaravinth/dumbserve:master -t realaravinth/dumbserve:latest .
 
 docker-publish: docker ## Build and publish Docker image
-	docker push realaravinth/dummyserve:master 
-	docker push realaravinth/dummyserve:latest
+	docker push realaravinth/dumbserve:master
+	docker push realaravinth/dumbserve:latest
 
 env: ## Setup development environtment
 	cargo fetch
