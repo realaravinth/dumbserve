@@ -218,8 +218,6 @@
 <span id="212">212</span>
 <span id="213">213</span>
 <span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
 </pre><pre class="rust"><code><span class="comment">/*
  * Copyright (C) 2022  Aravinth Manivannan &lt;realaravinth@batsense.net&gt;
  *
@@ -314,12 +312,10 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Settings</span> {
     <span class="kw">pub</span> <span class="ident">debug</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">commercial</span>: <span class="ident">bool</span>,
     <span class="comment">//    pub database: Database,</span>
     <span class="kw">pub</span> <span class="ident">server</span>: <span class="ident">Server</span>,
     <span class="kw">pub</span> <span class="ident">source_code</span>: <span class="ident">String</span>,
     <span class="kw">pub</span> <span class="ident">files</span>: <span class="ident">Files</span>,
-    <span class="kw">pub</span> <span class="ident">allow_registration</span>: <span class="ident">bool</span>,
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">tarpaulin_include</span>))]</span>
