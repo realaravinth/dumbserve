@@ -117,9 +117,9 @@ jobs:
         if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
         run: make docker-publish
 
-      - name: publish bins
-        if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
-        run: ./scripts/publish.sh master latest
+          #      - name: publish bins
+          #        if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'realaravinth/dumbserve'
+          #        run: ./scripts/publish.sh master latest
 
       - name: generate documentation
         if: matrix.version == 'stable' && (github.repository == 'realaravinth/dumbserve')
