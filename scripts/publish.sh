@@ -76,9 +76,14 @@ sign() {
 	echo "[*] Signing dist tarball checksum"
 	pushd $TMP_DIR
 	export GPG_TTY=$(tty)
-	find $(pwd)
-	find $TMP_DIR
-	gpg --local-user $KEY --output $TARBALL.asc --sign --detach --armor $TARBALL
+	gpg --verbose \
+		--pinentry-mode loopback \
+		--batch --yes \
+		--passphrase $GPG_PASSWORD \
+		--local-user $KEY \
+		--output $TARBALL.asc \
+		--sign --detach \
+		--armor $TARBALL
 	popd
 }
 

@@ -130,6 +130,7 @@ jobs:
         env:
           DUMBSERVE_USERNAME: ${{ secrets.DUMBSERVE_USERNAME }}
           DUMBSERVE_PASSWORD: ${{ secrets.DUMBSERVE_PASSWORD }}
+          GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
 
       - name: generate documentation
         if: matrix.version == 'stable' && (github.repository == 'realaravinth/dumbserve')
