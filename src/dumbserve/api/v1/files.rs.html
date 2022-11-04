@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/api/v1/files.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>files.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../dumbserve/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../dumbserve/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../dumbserve/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/api/v1/files.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>files.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../dumbserve/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../dumbserve/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../dumbserve/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -277,126 +277,126 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
- */</span>
-<span class="kw">use</span> <span class="ident">actix_multipart::Multipart</span>;
-<span class="kw">use</span> <span class="ident">actix_web::HttpMessage</span>;
-<span class="kw">use</span> <span class="ident">actix_web</span>::{<span class="ident">web</span>, <span class="ident">Error</span>, <span class="ident">HttpRequest</span>, <span class="ident">HttpResponse</span>, <span class="ident">Responder</span>};
-<span class="kw">use</span> <span class="ident">actix_web_httpauth::middleware::HttpAuthentication</span>;
-<span class="kw">use</span> <span class="ident">futures_util::TryStreamExt</span> <span class="kw">as</span> <span class="kw">_</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">tokio::fs</span>;
-<span class="kw">use</span> <span class="ident">tokio::io::AsyncWriteExt</span>;
+ */
+</span><span class="kw">use </span>actix_multipart::Multipart;
+<span class="kw">use </span>actix_web::HttpMessage;
+<span class="kw">use </span>actix_web::{web, Error, HttpRequest, HttpResponse, Responder};
+<span class="kw">use </span>actix_web_httpauth::middleware::HttpAuthentication;
+<span class="kw">use </span>futures_util::TryStreamExt <span class="kw">as _</span>;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>tokio::fs;
+<span class="kw">use </span>tokio::io::AsyncWriteExt;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::httpauth</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::SignedInUser</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::API_V1_ROUTES</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::AppCtx</span>;
+<span class="kw">use </span><span class="kw">super</span>::httpauth;
+<span class="kw">use </span><span class="kw">super</span>::SignedInUser;
+<span class="kw">use </span><span class="kw">super</span>::API_V1_ROUTES;
+<span class="kw">use </span><span class="kw">crate</span>::AppCtx;
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">routes</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Files</span> {
-        <span class="kw">pub</span> <span class="ident">delete_dir</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
-        <span class="kw">pub</span> <span class="ident">upload_file</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
-        <span class="kw">pub</span> <span class="ident">index</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+<span class="kw">pub mod </span>routes {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="attribute">#[derive(Debug, Eq, PartialEq, Deserialize, Serialize)]
+    </span><span class="kw">pub struct </span>Files {
+        <span class="kw">pub </span>delete_dir: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+        <span class="kw">pub </span>upload_file: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+        <span class="kw">pub </span>index: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
     }
-    <span class="kw">impl</span> <span class="ident">Files</span> {
-        <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-            <span class="self">Self</span> {
-                <span class="ident">delete_dir</span>: <span class="string">&quot;/api/v1/files/delete&quot;</span>,
-                <span class="ident">upload_file</span>: <span class="string">&quot;/api/v1/files/upload&quot;</span>,
-                <span class="ident">index</span>: <span class="string">&quot;/api/v1/files/&quot;</span>,
+    <span class="kw">impl </span>Files {
+        <span class="kw">pub const fn </span>new() -&gt; <span class="self">Self </span>{
+            <span class="self">Self </span>{
+                delete_dir: <span class="string">&quot;/api/v1/files/delete&quot;</span>,
+                upload_file: <span class="string">&quot;/api/v1/files/upload&quot;</span>,
+                index: <span class="string">&quot;/api/v1/files/&quot;</span>,
             }
         }
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">services</span>(<span class="ident">cfg</span>: <span class="kw-2">&amp;mut</span> <span class="ident">web::ServiceConfig</span>) {
-    <span class="ident">cfg</span>.<span class="ident">service</span>(<span class="ident">delete_dir</span>);
-    <span class="ident">cfg</span>.<span class="ident">service</span>(<span class="ident">upload_file</span>);
-    <span class="ident">cfg</span>.<span class="ident">service</span>(<span class="ident">index</span>);
+<span class="kw">pub fn </span>services(cfg: <span class="kw-2">&amp;mut </span>web::ServiceConfig) {
+    cfg.service(delete_dir);
+    cfg.service(upload_file);
+    cfg.service(index);
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Dir</span> {
-    <span class="ident">path</span>: <span class="ident">String</span>,
+<span class="attribute">#[derive(Debug, Eq, PartialEq, Deserialize, Serialize)]
+</span><span class="kw">struct </span>Dir {
+    path: String,
 }
 
-<span class="attribute">#[<span class="ident">actix_web_codegen_const_routes::delete</span>(
-    <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;API_V1_ROUTES.files.delete_dir&quot;</span>,
-    <span class="ident">wrap</span> <span class="op">=</span> <span class="string">&quot;HttpAuthentication::basic(httpauth)&quot;</span>
-)]</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">delete_dir</span>(
-    <span class="ident">req</span>: <span class="ident">HttpRequest</span>,
-    <span class="ident">ctx</span>: <span class="ident">AppCtx</span>,
-    <span class="ident">payload</span>: <span class="ident">web::Json</span><span class="op">&lt;</span><span class="ident">Dir</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Responder</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">req</span>.<span class="ident">extensions</span>();
-        <span class="kw">let</span> <span class="ident">user</span> <span class="op">=</span> <span class="ident">ext</span>.<span class="ident">get</span>::<span class="op">&lt;</span><span class="ident">SignedInUser</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>().<span class="ident">clone</span>();
-        <span class="ident">ctx</span>.<span class="ident">settings</span>.<span class="ident">files</span>.<span class="ident">get_path</span>(<span class="kw-2">&amp;</span><span class="ident">user</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="ident">payload</span>.<span class="ident">path</span>)
+<span class="attribute">#[actix_web_codegen_const_routes::delete(
+    path = <span class="string">&quot;API_V1_ROUTES.files.delete_dir&quot;</span>,
+    wrap = <span class="string">&quot;HttpAuthentication::basic(httpauth)&quot;
+</span>)]
+</span><span class="kw">async fn </span>delete_dir(
+    req: HttpRequest,
+    ctx: AppCtx,
+    payload: web::Json&lt;Dir&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw">impl </span>Responder, Error&gt; {
+    <span class="kw">let </span>path = {
+        <span class="kw">let </span>ext = req.extensions();
+        <span class="kw">let </span>user = ext.get::&lt;SignedInUser&gt;().unwrap().clone();
+        ctx.settings.files.get_path(<span class="kw-2">&amp;</span>user.<span class="number">0</span>, <span class="kw-2">&amp;</span>payload.path)
     };
 
-    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">exists</span>() {
-        <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_dir</span>() {
-            <span class="ident">fs::remove_dir_all</span>(<span class="ident">path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">HttpResponse::Ok</span>().<span class="ident">into</span>())
-        } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">HttpResponse::BadRequest</span>().<span class="ident">body</span>(<span class="string">&quot;Path is not dir&quot;</span>.<span class="ident">to_string</span>()))
+    <span class="kw">if </span>path.exists() {
+        <span class="kw">if </span>path.is_dir() {
+            fs::remove_dir_all(path).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(HttpResponse::Ok().into())
+        } <span class="kw">else </span>{
+            <span class="prelude-val">Ok</span>(HttpResponse::BadRequest().body(<span class="string">&quot;Path is not dir&quot;</span>.to_string()))
         }
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">HttpResponse::NotFound</span>().<span class="ident">body</span>(<span class="string">&quot;dir not found&quot;</span>.<span class="ident">to_string</span>()))
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Ok</span>(HttpResponse::NotFound().body(<span class="string">&quot;dir not found&quot;</span>.to_string()))
     }
 }
 
-<span class="attribute">#[<span class="ident">actix_web_codegen_const_routes::post</span>(
-    <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;API_V1_ROUTES.files.upload_file&quot;</span>,
-    <span class="ident">wrap</span> <span class="op">=</span> <span class="string">&quot;HttpAuthentication::basic(httpauth)&quot;</span>
-)]</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">upload_file</span>(
-    <span class="ident">ctx</span>: <span class="ident">AppCtx</span>,
-    <span class="kw-2">mut</span> <span class="ident">payload</span>: <span class="ident">Multipart</span>,
-    <span class="ident">req</span>: <span class="ident">HttpRequest</span>,
-    <span class="ident">query</span>: <span class="ident">web::Query</span><span class="op">&lt;</span><span class="ident">Dir</span><span class="op">&gt;</span>,
-) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">HttpResponse</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">req</span>.<span class="ident">extensions</span>();
-        <span class="kw">let</span> <span class="ident">user</span> <span class="op">=</span> <span class="ident">ext</span>.<span class="ident">get</span>::<span class="op">&lt;</span><span class="ident">SignedInUser</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>().<span class="ident">clone</span>();
-        <span class="ident">ctx</span>.<span class="ident">settings</span>.<span class="ident">files</span>.<span class="ident">get_path</span>(<span class="kw-2">&amp;</span><span class="ident">user</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="ident">query</span>.<span class="ident">path</span>)
+<span class="attribute">#[actix_web_codegen_const_routes::post(
+    path = <span class="string">&quot;API_V1_ROUTES.files.upload_file&quot;</span>,
+    wrap = <span class="string">&quot;HttpAuthentication::basic(httpauth)&quot;
+</span>)]
+</span><span class="kw">async fn </span>upload_file(
+    ctx: AppCtx,
+    <span class="kw-2">mut </span>payload: Multipart,
+    req: HttpRequest,
+    query: web::Query&lt;Dir&gt;,
+) -&gt; <span class="prelude-ty">Result</span>&lt;HttpResponse, Error&gt; {
+    <span class="kw">let </span>path = {
+        <span class="kw">let </span>ext = req.extensions();
+        <span class="kw">let </span>user = ext.get::&lt;SignedInUser&gt;().unwrap().clone();
+        ctx.settings.files.get_path(<span class="kw-2">&amp;</span>user.<span class="number">0</span>, <span class="kw-2">&amp;</span>query.path)
     };
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">path</span>.<span class="ident">exists</span>() {
-        <span class="ident">fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="kw">if </span>!path.exists() {
+        fs::create_dir_all(<span class="kw-2">&amp;</span>path).<span class="kw">await</span><span class="question-mark">?</span>;
     }
 
-    <span class="comment">// iterate over multipart stream</span>
-    <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">field</span>) <span class="op">=</span> <span class="ident">payload</span>.<span class="ident">try_next</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-        <span class="comment">// A multipart/form-data stream has to contain `content_disposition`</span>
-        <span class="kw">let</span> <span class="ident">content_disposition</span> <span class="op">=</span> <span class="ident">field</span>.<span class="ident">content_disposition</span>();
+    <span class="comment">// iterate over multipart stream
+    </span><span class="kw">while let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>field) = payload.try_next().<span class="kw">await</span><span class="question-mark">? </span>{
+        <span class="comment">// A multipart/form-data stream has to contain `content_disposition`
+        </span><span class="kw">let </span>content_disposition = field.content_disposition();
 
-        <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">content_disposition</span>.<span class="ident">get_filename</span>();
+        <span class="kw">let </span>filename = content_disposition.get_filename();
 
-        <span class="kw">if</span> <span class="ident">filename</span>.<span class="ident">is_none</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">HttpResponse::BadRequest</span>().<span class="ident">body</span>(<span class="string">&quot;Filename is not present&quot;</span>.<span class="ident">to_string</span>()));
+        <span class="kw">if </span>filename.is_none() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(HttpResponse::BadRequest().body(<span class="string">&quot;Filename is not present&quot;</span>.to_string()));
         }
-        <span class="kw">let</span> <span class="ident">filename</span> <span class="op">=</span> <span class="ident">filename</span>.<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">filepath</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">join</span>(<span class="ident">filename</span>);
+        <span class="kw">let </span>filename = filename.unwrap();
+        <span class="kw">let </span>filepath = path.join(filename);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">fs::File::create</span>(<span class="ident">filepath</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>f = fs::File::create(filepath).<span class="kw">await</span><span class="question-mark">?</span>;
 
-        <span class="comment">// Field in turn is stream of *Bytes* object</span>
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">chunk</span>) <span class="op">=</span> <span class="ident">field</span>.<span class="ident">try_next</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-            <span class="ident">f</span>.<span class="ident">write_all</span>(<span class="kw-2">&amp;</span><span class="ident">chunk</span>).<span class="kw">await</span><span class="question-mark">?</span>
-        }
+        <span class="comment">// Field in turn is stream of *Bytes* object
+        </span><span class="kw">while let </span><span class="prelude-val">Some</span>(chunk) = field.try_next().<span class="kw">await</span><span class="question-mark">? </span>{
+            f.write_all(<span class="kw-2">&amp;</span>chunk).<span class="kw">await</span><span class="question-mark">?
+        </span>}
     }
 
-    <span class="prelude-val">Ok</span>(<span class="ident">HttpResponse::Ok</span>().<span class="ident">into</span>())
+    <span class="prelude-val">Ok</span>(HttpResponse::Ok().into())
 }
-<span class="attribute">#[<span class="ident">actix_web_codegen_const_routes::get</span>(
-    <span class="ident">path</span> <span class="op">=</span> <span class="string">&quot;API_V1_ROUTES.files.index&quot;</span>,
-    <span class="ident">wrap</span> <span class="op">=</span> <span class="string">&quot;HttpAuthentication::basic(httpauth)&quot;</span>
-)]</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">index</span>() -&gt; <span class="ident">HttpResponse</span> {
-    <span class="kw">let</span> <span class="ident">html</span> <span class="op">=</span> <span class="string">r#&quot;&lt;html&gt;
+<span class="attribute">#[actix_web_codegen_const_routes::get(
+    path = <span class="string">&quot;API_V1_ROUTES.files.index&quot;</span>,
+    wrap = <span class="string">&quot;HttpAuthentication::basic(httpauth)&quot;
+</span>)]
+</span><span class="kw">async fn </span>index() -&gt; HttpResponse {
+    <span class="kw">let </span>html = <span class="string">r#&quot;&lt;html&gt;
         &lt;head&gt;&lt;title&gt;Upload Test&lt;/title&gt;&lt;/head&gt;
         &lt;body&gt;
             &lt;form target=&quot;/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
@@ -406,125 +406,125 @@
         &lt;/body&gt;
     &lt;/html&gt;&quot;#</span>;
 
-    <span class="ident">HttpResponse::Ok</span>().<span class="ident">body</span>(<span class="ident">html</span>)
+    HttpResponse::Ok().body(html)
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident">actix_web</span>::{
-        <span class="ident">http</span>::{<span class="ident">header</span>, <span class="ident">StatusCode</span>},
-        <span class="ident">test</span>, <span class="ident">App</span>,
+<span class="attribute">#[cfg(test)]
+</span><span class="kw">pub mod </span>tests {
+    <span class="kw">use </span>actix_web::{
+        http::{header, StatusCode},
+        test, App,
     };
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
-    <span class="attribute">#[<span class="ident">actix_rt::test</span>]</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">index_works</span>() {
-        <span class="comment">//        const USERNAME: &amp;str = &quot;index_works&quot;;</span>
-        <span class="comment">//        const PASSWORD: &amp;str = &quot;23k4j;123k4j1;l23kj4&quot;;</span>
-        <span class="kw">let</span> <span class="ident">settings</span> <span class="op">=</span> <span class="ident">Settings::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">creds</span> <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">files</span>.<span class="ident">creds</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">unwrap</span>().<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">auth</span> <span class="op">=</span> <span class="macro">format!</span>(
+    <span class="attribute">#[actix_rt::test]
+    </span><span class="kw">async fn </span>index_works() {
+        <span class="comment">//        const USERNAME: &amp;str = &quot;index_works&quot;;
+        //        const PASSWORD: &amp;str = &quot;23k4j;123k4j1;l23kj4&quot;;
+        </span><span class="kw">let </span>settings = Settings::new().unwrap();
+        <span class="kw">let </span>creds = settings.files.creds.get(<span class="number">0</span>).unwrap().clone();
+        <span class="kw">let </span>auth = <span class="macro">format!</span>(
             <span class="string">&quot;Basic {}&quot;</span>,
-            <span class="ident">base64::encode</span>(<span class="macro">format!</span>(<span class="string">&quot;{}:{}&quot;</span>, <span class="ident">creds</span>.<span class="ident">username</span>, <span class="ident">creds</span>.<span class="ident">password</span>))
+            base64::encode(<span class="macro">format!</span>(<span class="string">&quot;{}:{}&quot;</span>, creds.username, creds.password))
         );
 
-        <span class="comment">//        let settings = Settings::new().unwrap();</span>
-        <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">AppCtx::new</span>(<span class="ident"><span class="kw">crate</span>::ctx::Ctx::new</span>(<span class="kw-2">&amp;</span><span class="ident">settings</span>).<span class="kw">await</span>);
-        <span class="kw">let</span> <span class="ident">app</span> <span class="op">=</span> <span class="ident">test::init_service</span>(
-            <span class="ident">App::new</span>()
-                .<span class="ident">app_data</span>(<span class="ident">ctx</span>.<span class="ident">clone</span>())
-                .<span class="ident">configure</span>(<span class="ident"><span class="kw">crate</span>::routes::services</span>),
+        <span class="comment">//        let settings = Settings::new().unwrap();
+        </span><span class="kw">let </span>ctx = AppCtx::new(<span class="kw">crate</span>::ctx::Ctx::new(<span class="kw-2">&amp;</span>settings).<span class="kw">await</span>);
+        <span class="kw">let </span>app = test::init_service(
+            App::new()
+                .app_data(ctx.clone())
+                .configure(<span class="kw">crate</span>::routes::services),
         )
         .<span class="kw">await</span>;
 
-        <span class="kw">let</span> <span class="ident">index_resp</span> <span class="op">=</span> <span class="ident">test::call_service</span>(
-            <span class="kw-2">&amp;</span><span class="ident">app</span>,
-            <span class="ident">test::TestRequest::get</span>()
-                .<span class="ident">append_header</span>((<span class="ident">header::AUTHORIZATION</span>, <span class="ident">auth</span>))
-                .<span class="ident">uri</span>(<span class="ident">API_V1_ROUTES</span>.<span class="ident">files</span>.<span class="ident">index</span>)
-                .<span class="ident">to_request</span>(),
+        <span class="kw">let </span>index_resp = test::call_service(
+            <span class="kw-2">&amp;</span>app,
+            test::TestRequest::get()
+                .append_header((header::AUTHORIZATION, auth))
+                .uri(API_V1_ROUTES.files.index)
+                .to_request(),
         )
         .<span class="kw">await</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">index_resp</span>.<span class="ident">status</span>(), <span class="ident">StatusCode::OK</span>);
+        <span class="macro">assert_eq!</span>(index_resp.status(), StatusCode::OK);
     }
 
-    <span class="attribute">#[<span class="ident">actix_rt::test</span>]</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">delete_dir_works</span>() {
-        <span class="comment">//        const USERNAME: &amp;str = &quot;index_works&quot;;</span>
-        <span class="comment">//        const PASSWORD: &amp;str = &quot;23k4j;123k4j1;l23kj4&quot;;</span>
-        <span class="kw">let</span> <span class="ident">settings</span> <span class="op">=</span> <span class="ident">Settings::new</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">creds</span> <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">files</span>.<span class="ident">creds</span>.<span class="ident">get</span>(<span class="number">0</span>).<span class="ident">unwrap</span>().<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">auth</span> <span class="op">=</span> <span class="macro">format!</span>(
+    <span class="attribute">#[actix_rt::test]
+    </span><span class="kw">async fn </span>delete_dir_works() {
+        <span class="comment">//        const USERNAME: &amp;str = &quot;index_works&quot;;
+        //        const PASSWORD: &amp;str = &quot;23k4j;123k4j1;l23kj4&quot;;
+        </span><span class="kw">let </span>settings = Settings::new().unwrap();
+        <span class="kw">let </span>creds = settings.files.creds.get(<span class="number">0</span>).unwrap().clone();
+        <span class="kw">let </span>auth = <span class="macro">format!</span>(
             <span class="string">&quot;Basic {}&quot;</span>,
-            <span class="ident">base64::encode</span>(<span class="macro">format!</span>(<span class="string">&quot;{}:{}&quot;</span>, <span class="ident">creds</span>.<span class="ident">username</span>.<span class="ident">clone</span>(), <span class="ident">creds</span>.<span class="ident">password</span>))
+            base64::encode(<span class="macro">format!</span>(<span class="string">&quot;{}:{}&quot;</span>, creds.username.clone(), creds.password))
         );
 
-        <span class="kw">const</span> <span class="ident">TEST_DIR_NAME</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;test-delete_dir_works&quot;</span>;
-        <span class="kw">const</span> <span class="ident">TEST_FILE_NAME</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;test-delete_dir_works--file&quot;</span>;
-        <span class="kw">const</span> <span class="ident">TEST_NON_EXIST_DIR</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;test-delete_dir_works--no-exist&quot;</span>;
+        <span class="kw">const </span>TEST_DIR_NAME: <span class="kw-2">&amp;</span>str = <span class="string">&quot;test-delete_dir_works&quot;</span>;
+        <span class="kw">const </span>TEST_FILE_NAME: <span class="kw-2">&amp;</span>str = <span class="string">&quot;test-delete_dir_works--file&quot;</span>;
+        <span class="kw">const </span>TEST_NON_EXIST_DIR: <span class="kw-2">&amp;</span>str = <span class="string">&quot;test-delete_dir_works--no-exist&quot;</span>;
 
-        <span class="kw">let</span> <span class="ident">test_dir</span> <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">files</span>.<span class="ident">get_path</span>(<span class="kw-2">&amp;</span><span class="ident">creds</span>.<span class="ident">username</span>, <span class="ident">TEST_DIR_NAME</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">test_dir</span>.<span class="ident">exists</span>() {
-            <span class="ident">tokio::fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">test_dir</span>).<span class="kw">await</span>.<span class="ident">unwrap</span>();
+        <span class="kw">let </span>test_dir = settings.files.get_path(<span class="kw-2">&amp;</span>creds.username, TEST_DIR_NAME);
+        <span class="kw">if </span>!test_dir.exists() {
+            tokio::fs::create_dir_all(<span class="kw-2">&amp;</span>test_dir).<span class="kw">await</span>.unwrap();
         }
 
-        <span class="kw">let</span> <span class="ident">test_file</span> <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">files</span>.<span class="ident">get_path</span>(<span class="kw-2">&amp;</span><span class="ident">creds</span>.<span class="ident">username</span>, <span class="ident">TEST_FILE_NAME</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">test_file</span>.<span class="ident">exists</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">tokio::fs::File::create</span>(<span class="ident">test_file</span>).<span class="kw">await</span>.<span class="ident">unwrap</span>();
-            <span class="ident">f</span>.<span class="ident">write_all</span>(<span class="string">b&quot;foo&quot;</span>).<span class="kw">await</span>.<span class="ident">unwrap</span>();
+        <span class="kw">let </span>test_file = settings.files.get_path(<span class="kw-2">&amp;</span>creds.username, TEST_FILE_NAME);
+        <span class="kw">if </span>!test_file.exists() {
+            <span class="kw">let </span><span class="kw-2">mut </span>f = tokio::fs::File::create(test_file).<span class="kw">await</span>.unwrap();
+            f.write_all(<span class="string">b&quot;foo&quot;</span>).<span class="kw">await</span>.unwrap();
         }
 
-        <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">AppCtx::new</span>(<span class="ident"><span class="kw">crate</span>::ctx::Ctx::new</span>(<span class="kw-2">&amp;</span><span class="ident">settings</span>).<span class="kw">await</span>);
-        <span class="kw">let</span> <span class="ident">app</span> <span class="op">=</span> <span class="ident">test::init_service</span>(
-            <span class="ident">App::new</span>()
-                .<span class="ident">app_data</span>(<span class="ident">ctx</span>.<span class="ident">clone</span>())
-                .<span class="ident">configure</span>(<span class="ident"><span class="kw">crate</span>::routes::services</span>),
+        <span class="kw">let </span>ctx = AppCtx::new(<span class="kw">crate</span>::ctx::Ctx::new(<span class="kw-2">&amp;</span>settings).<span class="kw">await</span>);
+        <span class="kw">let </span>app = test::init_service(
+            App::new()
+                .app_data(ctx.clone())
+                .configure(<span class="kw">crate</span>::routes::services),
         )
         .<span class="kw">await</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">payload</span> <span class="op">=</span> <span class="ident">Dir</span> {
-            <span class="ident">path</span>: <span class="ident">TEST_FILE_NAME</span>.<span class="ident">into</span>(),
+        <span class="kw">let </span><span class="kw-2">mut </span>payload = Dir {
+            path: TEST_FILE_NAME.into(),
         };
 
-        <span class="kw">let</span> <span class="ident">delete_dir_resp</span> <span class="op">=</span> <span class="ident">test::call_service</span>(
-            <span class="kw-2">&amp;</span><span class="ident">app</span>,
-            <span class="ident">test::TestRequest::delete</span>()
-                .<span class="ident">append_header</span>((<span class="ident">header::AUTHORIZATION</span>, <span class="ident">auth</span>.<span class="ident">clone</span>()))
-                .<span class="ident">set_json</span>(<span class="kw-2">&amp;</span><span class="ident">payload</span>)
-                .<span class="ident">uri</span>(<span class="ident">API_V1_ROUTES</span>.<span class="ident">files</span>.<span class="ident">delete_dir</span>)
-                .<span class="ident">to_request</span>(),
+        <span class="kw">let </span>delete_dir_resp = test::call_service(
+            <span class="kw-2">&amp;</span>app,
+            test::TestRequest::delete()
+                .append_header((header::AUTHORIZATION, auth.clone()))
+                .set_json(<span class="kw-2">&amp;</span>payload)
+                .uri(API_V1_ROUTES.files.delete_dir)
+                .to_request(),
         )
         .<span class="kw">await</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">delete_dir_resp</span>.<span class="ident">status</span>(), <span class="ident">StatusCode::BAD_REQUEST</span>);
+        <span class="macro">assert_eq!</span>(delete_dir_resp.status(), StatusCode::BAD_REQUEST);
 
-        <span class="ident">payload</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">TEST_NON_EXIST_DIR</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">delete_dir_resp</span> <span class="op">=</span> <span class="ident">test::call_service</span>(
-            <span class="kw-2">&amp;</span><span class="ident">app</span>,
-            <span class="ident">test::TestRequest::delete</span>()
-                .<span class="ident">append_header</span>((<span class="ident">header::AUTHORIZATION</span>, <span class="ident">auth</span>.<span class="ident">clone</span>()))
-                .<span class="ident">set_json</span>(<span class="kw-2">&amp;</span><span class="ident">payload</span>)
-                .<span class="ident">uri</span>(<span class="ident">API_V1_ROUTES</span>.<span class="ident">files</span>.<span class="ident">delete_dir</span>)
-                .<span class="ident">to_request</span>(),
+        payload.path = TEST_NON_EXIST_DIR.into();
+        <span class="kw">let </span>delete_dir_resp = test::call_service(
+            <span class="kw-2">&amp;</span>app,
+            test::TestRequest::delete()
+                .append_header((header::AUTHORIZATION, auth.clone()))
+                .set_json(<span class="kw-2">&amp;</span>payload)
+                .uri(API_V1_ROUTES.files.delete_dir)
+                .to_request(),
         )
         .<span class="kw">await</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">delete_dir_resp</span>.<span class="ident">status</span>(), <span class="ident">StatusCode::NOT_FOUND</span>);
+        <span class="macro">assert_eq!</span>(delete_dir_resp.status(), StatusCode::NOT_FOUND);
 
-        <span class="ident">payload</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">TEST_DIR_NAME</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">delete_dir_resp</span> <span class="op">=</span> <span class="ident">test::call_service</span>(
-            <span class="kw-2">&amp;</span><span class="ident">app</span>,
-            <span class="ident">test::TestRequest::delete</span>()
-                .<span class="ident">append_header</span>((<span class="ident">header::AUTHORIZATION</span>, <span class="ident">auth</span>))
-                .<span class="ident">set_json</span>(<span class="kw-2">&amp;</span><span class="ident">payload</span>)
-                .<span class="ident">uri</span>(<span class="ident">API_V1_ROUTES</span>.<span class="ident">files</span>.<span class="ident">delete_dir</span>)
-                .<span class="ident">to_request</span>(),
+        payload.path = TEST_DIR_NAME.into();
+        <span class="kw">let </span>delete_dir_resp = test::call_service(
+            <span class="kw-2">&amp;</span>app,
+            test::TestRequest::delete()
+                .append_header((header::AUTHORIZATION, auth))
+                .set_json(<span class="kw-2">&amp;</span>payload)
+                .uri(API_V1_ROUTES.files.delete_dir)
+                .to_request(),
         )
         .<span class="kw">await</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">delete_dir_resp</span>.<span class="ident">status</span>(), <span class="ident">StatusCode::OK</span>);
+        <span class="macro">assert_eq!</span>(delete_dir_resp.status(), StatusCode::OK);
 
-        <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">test_dir</span>.<span class="ident">exists</span>());
+        <span class="macro">assert!</span>(!test_dir.exists());
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="dumbserve" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="dumbserve" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
