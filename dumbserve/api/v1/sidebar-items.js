@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["API_V1_ROUTES",""]],"fn":[["httpauth",""],["services",""]],"mod":[["files",""],["meta",""],["routes",""]],"struct":[["SignedInUser",""]]};
+window.SIDEBAR_ITEMS = {"constant":["API_V1_ROUTES"],"fn":["httpauth","services"],"mod":["files","meta","routes"],"struct":["SignedInUser"]};

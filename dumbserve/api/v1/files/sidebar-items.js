@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["services",""]],"mod":[["routes",""]],"struct":[["Dir",""],["delete_dir",""],["index",""],["upload_file",""]]};
+window.SIDEBAR_ITEMS = {"constant":["FIELDS"],"enum":["__Field"],"fn":["delete_dir","index","services","upload_file"],"mod":["routes"],"struct":["Dir","__FieldVisitor","__Visitor","delete_dir","index","upload_file"]};

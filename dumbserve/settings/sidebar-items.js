@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["check_url",""]],"struct":[["Creds",""],["Files",""],["Server",""],["Settings",""]]};
+window.SIDEBAR_ITEMS = {"constant":["CURRENT_DIR","ETC","FIELDS"],"enum":["__Field"],"fn":["check_url"],"struct":["Creds","Files","Server","Settings","__FieldVisitor","__Visitor"]};
